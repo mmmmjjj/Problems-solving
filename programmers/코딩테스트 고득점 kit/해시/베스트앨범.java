@@ -2,7 +2,9 @@ import java.util.*;
 
 class Solution {
     public int[] solution(String[] genres, int[] plays) {
+        // 장르 - 노래목록
         HashMap<String, ArrayList<Node>> map = new HashMap<>();
+        // 장르 - 장르 내  총 재생 횟수
         HashMap<String, Integer> genre = new HashMap<>();
         
         for(int i=0; i<plays.length; i++) {
@@ -14,13 +16,15 @@ class Solution {
         }
         
         ArrayList<String> keys = new ArrayList<>(genre.keySet());
-        
+        // 장르를 재생횟수 내림차순 정렬
         Collections.sort(keys, (o1, o2) -> genre.get(o2)- genre.get(o1));
         
         ArrayList<Integer> list = new ArrayList<>();
-        for(String key: keys) {
+        for (String key : keys) {
+            // 노래를 재생수 내림차순 , 번호 오름차순으로 정렬
             Collections.sort(map.get(key));
             
+            // 1순위 2순위 list에 추가
             list.add(map.get(key).get(0).num);
             if(map.get(key).size() > 1)
                 list.add(map.get(key).get(1).num);
